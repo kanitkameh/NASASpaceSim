@@ -12,17 +12,18 @@ public class StarTemperatureUtils : MonoBehaviour
 
     // Wien's displacement law
     // Wavelength is measured in meters
-    public double getMostIntensiveWavelengthFromTemperature(double Kelvin){
+    static public double getMostIntensiveWavelengthFromTemperature(double Kelvin){
         return wienDisplacement/Kelvin;
     }
-    public Color getColorFromStarTemperature(double Kelvin){
-        int waveInNanometers = (int)(getMostIntensiveWavelengthFromTemperature(Kelvin)*Math.Pow(10,9));
-        return new WaveToRGB().waveToRGB(waveInNanometers);
+    static public Color getColorFromStarTemperature(double kelvin){
+        int waveInNanometers = (int)(getMostIntensiveWavelengthFromTemperature(kelvin)*Math.Pow(10,9));
+        Debug.Log("A star with "+kelvin+" kelvin degree temp emits most light with wavelength "+waveInNanometers+" nm.");
+        return WaveToRGB.waveToRGB(waveInNanometers);
     }
     // Planck's law
     // Don't use it because it doesn't compute the values 100% correctly
     // wavelength is measured in meters, temperature in Kelvins
-    double getWaveIntensity(double wavelength,double temperature){
+    static double getWaveIntensity(double wavelength,double temperature){
         return ((2d*h*Math.Pow(c,2d))/Math.Pow(wavelength,5d)) * (1d/(Math.Pow(Math.E,h*c/wavelength*k*temperature)-1));
     }
 }

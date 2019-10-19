@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WaveToRGB {
     //Wavelength is in nanometers
-    public Color waveToRGB(int wavelength) {
+    static public Color waveToRGB(int wavelength) {
         float attenuation;
         float R, G, B;
 
@@ -46,6 +46,8 @@ public class WaveToRGB {
         R = R * 255;
         G = G * 255;
         B = B * 255;
-        return new Color(R,G,B);
+        Color result = new Color(R,G,B);
+        Debug.Log("Light with wavelength "+wavelength+" has RGB color "+new Color(R,G,B).ToString());
+        return result;
     }   
 }

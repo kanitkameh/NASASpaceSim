@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+ using UnityEngine.UI;
 public class ObjectCreator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void createSun(){
+        GameObject sun = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        double tempInKelvins;
+        if(double.TryParse(GameObject.Find ("StarTemperatures").GetComponent<InputField>().text,out tempInKelvins)){
+            Debug.Log("Temperature input is correct: "+tempInKelvins);
+        }else{
+            Debug.Log("ERROR: Temperature input is correct");
+        }
+        sun.transform.position = new Vector3(0, 0, 0);
+        sun.GetComponent<Renderer>().material.color = StarTemperatureUtils.getColorFromStarTemperature(tempInKelvins);
     }
 }
