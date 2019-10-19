@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class WaveToRGB {
+    //Wavelength is in nanometers
     public Color waveToRGB(int wavelength) {
         float attenuation;
         float R, G, B;

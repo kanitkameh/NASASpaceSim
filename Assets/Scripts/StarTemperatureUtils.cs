@@ -16,7 +16,8 @@ public class StarTemperatureUtils : MonoBehaviour
         return wienDisplacement/Kelvin;
     }
     public Color getColorFromStarTemperature(double Kelvin){
-        return new WaveToRGB().waveToRGB((int)(getMostIntensiveWavelengthFromTemperature(Kelvin)*Math.Pow(10,9)));
+        int waveInNanometers = (int)(getMostIntensiveWavelengthFromTemperature(Kelvin)*Math.Pow(10,9));
+        return new WaveToRGB().waveToRGB(waveInNanometers);
     }
     // Planck's law
     // Don't use it because it doesn't compute the values 100% correctly
