@@ -17,14 +17,22 @@ public class StarTemperatureUtils : MonoBehaviour
         return wienDisplacement/Kelvin;
     }
     static public Color getColorFromStarTemperature(double kelvin){
-        int waveInNanometers = (int)(getMostIntensiveWavelengthFromTemperature(kelvin)*Math.Pow(10,9));
-        Debug.Log("A star with "+kelvin+" kelvin degree temp emits most light with wavelength "+waveInNanometers+" nm.");
+        //int waveInNanometers = (int)(getMostIntensiveWavelengthFromTemperature(kelvin)*Math.Pow(10,9));
+        //Debug.Log("A star with "+kelvin+" kelvin degree temp emits most light with wavelength "+waveInNanometers+" nm.");
+        double averageWave=0;
+        double totalIntensity=0;
+        for(int i=380;i<=780;i++){
+            totalIntensity += getWaveIntensity(i/1000000000d,kelvin);
+        }
+        for(int i=380;i<=780;i++){
+            averageWave += (getWaveIntensity(i/1000000000d,kelvin)/totalIntensity)*i;
+        }
+        int waveInNanometers = (int)averageWave;
         return WaveToRGB.waveToRGB(waveInNanometers);
     }
     // Planck's law
-    // Don't use it because it doesn't compute the values 100% correctly
     // wavelength is measured in meters, temperature in Kelvins
     static double getWaveIntensity(double wavelength,double temperature){
-        return ((2d*h*Math.Pow(c,2d))/Math.Pow(wavelength,5d)) * (1d/(Math.Pow(Math.E,h*c/wavelength*k*temperature)-1));
+        return (2d*h*Math.Pow(c,2d) / Math.Pow(wavelength,5d)) / (Math.Pow(Math.E,(h*c)/(wavelength*k*temperature)) - 1);
     }
 }

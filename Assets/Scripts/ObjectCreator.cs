@@ -16,4 +16,29 @@ public class ObjectCreator : MonoBehaviour
         Star star = starObj.AddComponent<Star>();
         star.temperature=tempInKelvins;
     }
+    public void createPlanet(){
+        GameObject planetObj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        double planetRadius;
+        if(double.TryParse(GameObject.Find("PlanetRadiusInput").GetComponent<InputField>().text,out planetRadius)){
+            Debug.Log("PLanet radius is legit");
+        }else{
+            Debug.Log("Planet incorrect radius value");
+        }
+        double distanceFromSun;
+        if(double.TryParse(GameObject.Find("DistanceFromSunInput").GetComponent<InputField>().text,out distanceFromSun)){
+            Debug.Log("PLanet distance from sun is legit");
+        }else{
+            Debug.Log("Planet incorrect distance from sun value");
+        }
+
+        planetObj.transform.position = new Vector3((float)distanceFromSun,0,0);
+        Planet planet = planetObj.AddComponent<Planet>();
+        EllipticalRotation ellipticalRotationScript = planetObj.AddComponent<EllipticalRotation>();
+        ellipticalRotationScript.scaleFactorX=(float)distanceFromSun;
+        ellipticalRotationScript.scaleFactorY=(float)distanceFromSun;
+        ellipticalRotationScript.centerX=0;
+        ellipticalRotationScript.centerY=0;
+        //planet.rotationPeriod = 1;
+        
+    }
 }
