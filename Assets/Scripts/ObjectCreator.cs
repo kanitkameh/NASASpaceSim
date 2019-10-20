@@ -5,14 +5,15 @@ using UnityEngine;
 public class ObjectCreator : MonoBehaviour
 {
     public void createSun(){
-        GameObject sun = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        GameObject starObj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         double tempInKelvins;
         if(double.TryParse(GameObject.Find ("StarTemperatures").GetComponent<InputField>().text,out tempInKelvins)){
             Debug.Log("Temperature input is correct: "+tempInKelvins);
         }else{
             Debug.Log("ERROR: Temperature input is correct");
         }
-        sun.transform.position = new Vector3(0, 0, 0);
-        sun.GetComponent<Renderer>().material.color = StarTemperatureUtils.getColorFromStarTemperature(tempInKelvins);
+        starObj.transform.position = new Vector3(0, 0, 0);
+        Star star = starObj.AddComponent<Star>();
+        star.temperature=tempInKelvins;
     }
 }
