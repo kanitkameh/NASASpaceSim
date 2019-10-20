@@ -6,6 +6,14 @@ namespace Wavelength {
         static public Color waveToRGB(int wavelength) {
             float attenuation;
             float R, G, B;
+            if (wavelength > 750f) {
+                wavelength = 750;
+            }
+
+            if( wavelength < 380f) {
+                wavelength = 380;
+            }
+
             Debug.Log(wavelength);
             if (wavelength >= 380f & wavelength <= 440f) {
                 attenuation = 0.3f + 0.7f * (wavelength - 380f) / (440f - 380f);
@@ -47,9 +55,9 @@ namespace Wavelength {
                 G = 0f;
                 B = 0f;
             }
-            R = R * 255;
-            G = G * 255;
-            B = B * 255;
+            R = R * 255f;
+            G = G * 255f;
+            B = B * 255f;
             Color result = new Color(R,G,B);
             Debug.Log("Light with wavelength "+wavelength+" has RGB color "+new Color(R,G,B).ToString());
             return result;
