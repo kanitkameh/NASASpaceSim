@@ -755,7 +755,7 @@ GameObject:
   - component: {fileID: 475761617}
   - component: {fileID: 475761616}
   m_Layer: 5
-  m_Name: DistanceFromSun
+  m_Name: DistanceFromSunInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
